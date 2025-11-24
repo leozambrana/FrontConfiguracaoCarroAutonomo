@@ -75,7 +75,7 @@ void loop() {
 
     if (i < 3) {
       if(i == 1 ){
-        virarDireita(${Math.round(delayViragemMs * 0.952)});
+        virarDireita(${Math.round(delayViragemMs * 1)});
       } else {
         virarDireita(${Math.round(delayViragemMs * 1)});
       }
