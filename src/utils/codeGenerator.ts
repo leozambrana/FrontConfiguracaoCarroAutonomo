@@ -16,28 +16,28 @@ void pararMotores() {
   motor4.run(RELEASE);
 }
 
-void virarDireita() {
-  motor1.run(RELEASE); // traseira direita
-  motor4.run(RELEASE); // dianteira direita
-  motor2.run(BACKWARD);  // traseira ESQUERDA parada
-  motor3.run(BACKWARD);
+void virarDireita(int delayCurva) {
+  motor1.run(RELEASE); 
+  motor4.run(RELEASE); 
+  motor2.run(BACKWARD); 
+  motor3.run(FORWARD);
   
   //710 é o delay perfeito para fazer 90 graus com bateria cheia
   //este valor de 710 é valido somente quando sem o peso da areia
 
-  delay(${delayViragemMs}); // calibrar
+  delay(delayCurva); // calibrar
   pararMotores();
   delay(500);
 }
 
 void avancarComMarcacao(long tempoAvanco_ms) {
   servoPorta.write(0);
-  delay(300); // dá tempo do servo abrir
+  delay(300); 
 
   motor1.run(BACKWARD);
   motor2.run(BACKWARD);
-  motor3.run(BACKWARD);
-  motor4.run(BACKWARD);
+  motor3.run(FORWARD);
+  motor4.run(FORWARD);
   
   delay(tempoAvanco_ms);
 
@@ -63,9 +63,7 @@ void loop() {
   long tempoLado = 0;
 
   for (int i = 0; i < 4; i++) {
-    // if(i == 3) {
-    //   tempoLado = 1560;
-    // }
+
     tempoLado = ${temposLado[0]};
     if(i == 1 || i == 3) {
       tempoLado = ${temposLado[1]};
@@ -76,7 +74,11 @@ void loop() {
     delay(700);
 
     if (i < 3) {
-      virarDireita();
+      if(i == 1 ){
+        virarDireita(${Math.round(delayViragemMs * 0.952)});
+      } else {
+        virarDireita(${Math.round(delayViragemMs * 1)});
+      }
       delay(300);
       servoPorta.write(75);
     }

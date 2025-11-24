@@ -60,7 +60,7 @@ const Index = () => {
                     <Slider
                       id="delay-viragem"
                       min={500}
-                      max={2000}
+                      max={8000}
                       step={10}
                       value={[delayViragemMs]}
                       onValueChange={(value) => setDelayViragemMs(value[0])}
@@ -101,7 +101,7 @@ const Index = () => {
                       <Slider
                         id={`lado-${index + 1}`}
                         min={100}
-                        max={3000}
+                        max={10000}
                         step={10}
                         value={[lado.value]}
                         onValueChange={(value) => lado.setValue(value[0])}
